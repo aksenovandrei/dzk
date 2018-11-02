@@ -8,7 +8,7 @@ use Gate;
 
 class AdminController extends Controller
 {
-    protected $a_rep; // articles
+    protected $certificateRepository; // articles
     protected $c_rep; // categories
     protected $t_rep; // tags
     protected $n_rep; // news

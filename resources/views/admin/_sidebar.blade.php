@@ -5,8 +5,8 @@
             <i class="fa fa-dashboard"></i> <span>Админ-панель</span>
         </a>
     </li>
-    <li><a href="#" style="{{(Route::currentRouteName() == 'articles.index') ? 'border-left-color: #3c8dbc' : ''}}"><i
-                    class="fa fa-sticky-note-o"></i> <span>Все статьи</span></a></li>
+    <li><a href="{{route('certificates.index')}}" style="{{(Route::currentRouteName() == 'articles.index') ? 'border-left-color: #3c8dbc' : ''}}"><i
+                    class="fa fa-sticky-note-o"></i> <span>Сертификаты</span></a></li>
     <li><a href="#" style="{{(Route::currentRouteName() == 'categories.index') ? 'border-left-color: #3c8dbc' : ''}}"><i class="fa fa-list-ul"></i> <span>Категории</span></a></li>
     <li><a href="#" style="{{(Route::currentRouteName() == 'tags.index') ? 'border-left-color: #3c8dbc' : ''}}"><i class="fa fa-tags"></i> <span>Теги</span></a></li>
     <li><a href="#" style="{{(Route::currentRouteName() == 'news.index') ? 'border-left-color: #3c8dbc' : ''}}"><i class="fa fa-newspaper-o"></i> <span>Новости</span></a></li>

@@ -14,6 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//Route::post('/activation', 'ActivateController@index')->name('activation');
+//Route::post('/activation/book', 'ActivateController@bookJump')->name('bookJump');
+//Route::get('/activation', function (){
+//    return view('front.activation');
+//});
+
+//Route::post('/activation', 'ActivateController@check');
+Route::resource('/activation', 'ActivateController');
+Route::post('/activation/form', 'ActivateController@showBookingForm')->name('yyy');
 
 //AUTH
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -24,6 +33,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function (){
     Route::get('/', ['uses' => 'IndexController@index', 'as' => 'adminIndex']);
+    Route::resource('/certificates', 'CertificatesController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

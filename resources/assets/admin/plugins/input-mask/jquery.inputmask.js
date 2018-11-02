@@ -1170,7 +1170,7 @@
             function mask(el) {
                 $el = $(el);
                 if ($el.is(":input")) {
-                    //store tests & original buffer in the input element - used to get the unmasked value
+                    //store certificates & original buffer in the input element - used to get the unmasked value
                     $el.data('_inputmask', {
                         'masksets': masksets,
                         'activeMasksetIndex': activeMasksetIndex,
