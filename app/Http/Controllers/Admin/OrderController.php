@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Order;
+use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 
 class OrderController extends AdminController
 {
-    public function __construct(CertificateRepository $certificateRepository)
+    public function __construct(OrderRepository $orderRepository)
     {
         parent::__construct();
-        $this->certificateRepository = $certificateRepository;
+        $this->orderRepository = $orderRepository;
         $this->template = 'admin.certificates.index';
     }
 
@@ -21,6 +22,8 @@ class OrderController extends AdminController
      */
     public function index(Request $request)
     {
+        $this->title = 'Менеджер заказов';
+
         $request->session()->put('search', $request
             ->has('search') ? $request->get('search') : ($request->session()
             ->has('search') ? $request->session()->get('search') : ''));
@@ -32,12 +35,13 @@ class OrderController extends AdminController
         $request->session()->put('sort', $request
             ->has('sort') ? $request->get('sort') : ($request->session()
             ->has('sort') ? $request->session()->get('sort') : 'desc'));
-        $this->title = 'Менеджер заказов';
-        $certificates = $this->certificateRepository->getAjax($request);
+
+        $orders = $this->orderRepository->getAjax($request);
+
         if ($request->ajax()) {
-            return view('admin.certificates.content')->with('certificates', $certificates);
+            return view('admin.orders.content')->with('orders', $orders);
         } else {
-            $this->content = view('admin.certificates.content')->with('certificates', $certificates);
+            $this->content = view('admin.orders.content')->with('orders', $orders);
             return $this->renderOutput();
         }
     }

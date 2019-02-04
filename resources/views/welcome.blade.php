@@ -80,13 +80,15 @@
             @endauth
         </div>
     @endif
-
+@include('errors')
     <div class="content">
         <div class="title m-b-md">
             DZ Крутицы
         </div>
 
     </div>
+        <a href="{{route('showCertificateOrderForm')}}"><button class="btn">Купить сертификат</button></a>
+        <a href="{{route('showJumpOrderForm')}}"><button class="btn">Прыгнуть</button></a>
         <div class="form" style="width: 25%">
         {!! Form::open([
                 'url'	=> route('yyy'),

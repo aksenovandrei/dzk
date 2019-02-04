@@ -66,8 +66,8 @@
                         <td>{{$certificate->expirationDate}}</td>
                         <td>{{$certificate->address->address ?? 'не указан адрес'}}</td>
                         <td>{{$certificate->pinCode ?? '-'}}</td>
-                        <td>{{$certificate->userOwner->name ?? '-'}}</td>
-                        <td>{{$certificate->userActivator->name ?? '-'}}</td>
+                        <td>{{$certificate->customerOwner->firstName ?? '-'}} {{$certificate->customerOwner->lastName ?? '-'}}</td>
+                        <td>{{$certificate->customerActivator->firstName ?? '-'}} {{$certificate->customerActivator->lastName ?? '-'}}</td>
                         <td>{{$certificate->updated_at}}</td>
                         <td>{{$certificate->created_at}}</td>
                         <td>

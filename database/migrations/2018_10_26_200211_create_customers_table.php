@@ -17,13 +17,13 @@ class CreateCustomersTable extends Migration
             $table->increments('id');
             $table->string('firstName');
             $table->string('lastName');
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('email');
-            $table->integer('product_id');
-            $table->integer('order_id');
-            $table->integer('certificate_id');
-            $table->date('jumpDate');
-            $table->time('jumpTime');
+//            $table->integer('product_id');
+//            $table->integer('order_id');
+//            $table->integer('certificate_id');
+            $table->date('jumpDate')->nullable();
+            $table->time('jumpTime')->nullable();
             $table->timestamps();
         });
     }

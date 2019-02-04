@@ -63,9 +63,27 @@ abstract class Repository
             Storage::delete('uploads/' . $img);
         }
     }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
     public function getAjax($request){
-        $certificates = $this->model->where('title', 'like', '%' . $request->session()->get('search') . '%')
+        $certificates = $this->model
+            ->where('title', 'like', '%' . $request->session()->get('search') . '%')
             ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(10);
         return $certificates;
+    }
+
+    /**
+     * @param $code
+     * @return bool
+     */
+    public function checkCode($code){
+        $certificate = $this->model
+            ->where('code', $code)
+            /*->whereNotIn('status_id', [1, 4, 5])*/
+            ->first();
+        return $certificate ?? false;
     }
 }

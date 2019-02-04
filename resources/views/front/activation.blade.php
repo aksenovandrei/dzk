@@ -77,6 +77,15 @@
     'class' => 'contact-form'
     ])!!}
     {{Form::text('code', $certificate->code ?? 'Введите код', ['class' => 'form-control pull-left col-md-3', 'placeholder' => 'введите код сертификата'])}}
+    <select name="test1">
+    @foreach($availableDays as $availableDay)
+
+        @foreach($availableDay->intervals as $interval)
+{{--                {{dd($interval)}}--}}
+            <option name="test">{{$availableDay->date . ' Время: ' . $interval->interval . ' Свободно мест: ' . $interval->pivot->numberOfAvailableSeats}}</option>
+        @endforeach
+    @endforeach
+    </select>
     {{Form::text('first_name', '', ['class' => 'form-control ', 'placeholder' => 'введите имя'])}}
     {{Form::text('last_name', '', ['class' => 'form-control ', 'placeholder' => 'введите фамилию'])}}
     {{Form::email('email', '', ['class' => 'form-control ', 'placeholder' => 'введите email'])}}

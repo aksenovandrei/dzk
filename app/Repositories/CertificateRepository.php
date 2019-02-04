@@ -20,14 +20,33 @@ class CertificateRepository extends Repository
             ->orWhereHas('address', function ($query) use ($searchString){
                 $query->where('address','like', '%' . $searchString . '%' );
             })
+            ->orWhereHas('status', function ($query) use ($searchString){
+                $query->where('title','like', '%' . $searchString . '%' );
+            })
             ->orderBy($request->session()->get('field'), $request->session()->get('sort'))->paginate(10);
         return $certificates;
     }
-    public function checkCode($code){
-        $certificate = $this->model->where('code', $code)
-                                   ->whereNotIn('status_id', [1, 4, 5])
-                                   ->first();
-        return $certificate ?? false;
+
+    public function createCertificate($data)
+    {
+        $this->model->fill($data);
+        $this->model->code = $this->createUniqueCertificateCode();
+//        $this->model->expirationData = date('Y');
+        $this->model->save();
+
+        return $this->model->code;
     }
 
+    public function createUniqueCertificateCode() {
+        $code = rand(1000000,9999999);
+        if ($this->model->where('code', $code)->first()) {
+            $this->createUniqueCertificateCode();
+        }
+        return $code;
+    }
+
+    public function getCertificateByOrderId($orderId)
+    {
+        return $this->model->where('order_id', $orderId)->first();
+    }
 }

@@ -26,10 +26,24 @@ $factory->define(App\Certificate::class, function (Faker $faker) {
         'code' => $faker->randomNumber(5, false),
         'expirationDate' => $faker->date('Y-m-d'),
         'pinCode' => $faker->randomNumber(4, false),
-        'user_owner_id' => $faker->numberBetween(1,4),
-        'user_activator_id' => $faker->numberBetween(1,4),
+        'customer_owner_id' => $faker->numberBetween(1,4),
+        'customer_activator_id' => $faker->numberBetween(1,4),
         'status_id' => $faker->numberBetween(1,5),
         'address_id' => $faker->numberBetween(1,3),
+        'product_id' => $faker->numberBetween(1,6)
+    ];
+});
+
+$factory->define(App\Customer::class, function (Faker $faker) {
+    return [
+        'firstName' => $faker->firstName,
+        'lastName' => $faker->lastName,
+        'phone' => $faker->randomNumber(5, false),
+        'email' => $faker->unique()->safeEmail,
+        'jumpDate' => $faker->date('Y-m-d'),
+        'jumpTime' => $faker->time(),
+        'order_id' => $faker->numberBetween(1,2),
+        'certificate_id' => $faker->numberBetween(1,3),
         'product_id' => $faker->numberBetween(1,6)
     ];
 });

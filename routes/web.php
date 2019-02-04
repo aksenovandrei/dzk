@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'IndexController@index');
+Route::get('/buyCertificate', 'IndexController@showCertificateOrderForm')->name('showCertificateOrderForm');
+Route::get('/buyJump', 'IndexController@showJumpOrderForm')->name('showJumpOrderForm');
+
+Route::post('/buyCertificate', 'PaymentController@makePayment')->name('makePayment');
+
 //Route::post('/activation', 'ActivateController@index')->name('activation');
 //Route::post('/activation/book', 'ActivateController@bookJump')->name('bookJump');
 //Route::get('/activation', function (){
@@ -34,6 +37,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => 'auth'], function (){
     Route::get('/', ['uses' => 'IndexController@index', 'as' => 'adminIndex']);
     Route::resource('/certificates', 'CertificatesController');
+    Route::resource('/orders', 'OrderController');
+    Route::resource('/customers', 'CustomerController');
+    Route::resource('/days', 'DayController');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test', 'TestController@index')->name('test');
+Route::post('/buyCertificate/callback', 'PaymentController@callbackFromYandex');

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Certificate extends Model
 {
+    protected $fillable = ['code', 'expirationDate', 'order_id'];
+
     public function status(){
         return $this->belongsTo('App\Status');
     }
@@ -15,11 +17,11 @@ class Certificate extends Model
     public function product(){
         return $this->hasOne('App\Product', 'id', 'product_id');
     }
-    public function userOwner(){
-        return $this->hasOne('App\User', 'id', 'user_owner_id');
+    public function customerOwner(){
+        return $this->belongsTo('App\Customer', 'customer_owner_id', 'id');
     }
-    public function userActivator(){
-        return $this->hasOne('App\User', 'id', 'user_activator_id');
+    public function customerActivator(){
+        return $this->hasOne('App\Customer', 'id', 'customer_activator_id');
     }
 
 }
